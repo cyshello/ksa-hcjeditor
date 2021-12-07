@@ -198,6 +198,11 @@
             <script>
                 window.onload = function(){
                     //addwindownum
+                    var editable_elements = document.querySelectorAll("[contenteditable=true]");
+                    for(var i=0; i<editable_elements.length; i++)
+                    {
+                        editable_elements[i].setAttribute("contenteditable", false);
+                    }
                     function changewindow(window){
                         for(let i = 1; i <= windownum;i++)
                         {
@@ -228,6 +233,6 @@
             <div class="window1" style="bottom: 0;right: 0;width: 100%;height: 100%;margin: 0;display: block;">
                 
             </div>
-        </div>        
+        </div>          
     </body>
 </html>
