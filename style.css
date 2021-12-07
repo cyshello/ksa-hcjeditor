@@ -1,0 +1,124 @@
+* { box-sizing: border-box; }
+img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.left-nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #f5ecd3;
+}
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 20%;
+    background-color: #f5ecd3;
+    /*border : 1px groove black;*/
+    /*
+    border-style: double;
+    border-width: 2px;
+    border-color: black;*/
+}
+
+.window-element-tabselect {
+    display: flex;
+    height: 20%;
+}
+
+.tab {
+    position: relative;
+    height: 80%;
+    bottom: 0px;
+    width: 100%;
+}
+
+.window-tab {
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    bottom: 0px;
+    width: 100%;
+    visibility: hidden;
+}
+
+.element-tab {
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    bottom: 0px;
+    width: 100%;
+}
+
+.resultpage {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 80% !important;
+    height: 80% !important;
+    top:20% !important;
+    left: 20% !important;
+}
+
+.show-attribute {
+    width: 100%;
+    height: 100%;
+}
+
+.modal { 
+    position: absolute; 
+    z-index: 1;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    display: none; 
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.modal.show { 
+    display: block; 
+}
+
+.modal-body { 
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.function-modal { 
+    position: absolute; 
+    z-index: 1;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    display: none; 
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.function-modal.show { 
+    display: block; 
+}
+
+.function-modal-body { 
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+
+.resizable {
+    resize: both;
+    overflow: auto;
+}

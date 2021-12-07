@@ -1,0 +1,233 @@
+<html>
+    <body>
+        <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/balloon/ckeditor.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="idstyle.css">
+        <script src="script.js"></script>
+
+        <div class="modal">
+            <div class="modal-body">
+                <button class="modal_close">X</button>
+                <button class="css_select">Select</button>
+                <div class="css-preview">
+                    <div class="btn-css" style="position: relative; display: none; overflow: auto;">
+                        <button class="btn_css0"></button>
+                        <button class="btn_css1"></button>
+                        <button class="btn_css2"></button>
+                    </div>
+                    <div class="textarea-css" style="position: relative; display: none; overflow: auto;">
+                        <textarea class="textarea_css0"></textarea>
+                        <textarea class="textarea_css1"></textarea>
+                        <textarea class="textarea_css2"></textarea>
+                        <textarea class="textarea_css3"></textarea>
+                    </div>
+                    <div class="div-css"style="position: relative; display: none; overflow: auto;">
+                        <div style="display: flex;">
+                            <div class="div_css0"></div>
+                            <div class="div_css1"></div>
+                            <div class="div_css2"></div>
+                            <div class="div_css3"></div>
+                            <div class="div_css4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="function-modal">
+            <div class="function-modal-body">
+                <button class="function-modal_close">X</button>
+                <button class="function_select">Select</button>
+                <div class="function-preview" >
+                    <select name="function" id="function-select" style="width: 100px;">
+                        <option value="click">click</option>
+                    </select>
+                    <select name="window-function" id="window-function-select" style="width: 120px;">
+                        <option value="url">link url</option>
+                        <option value="window1">Link window1</option>
+                    </select>
+                    URL : <input type="text" id="link-url">
+                </div>
+            </div>
+        </div>
+        
+        <div class="left-nav">
+            <div class="file-extract" style="height: 4%;">
+                <button id="extract-file" style="background-color: cadetblue;width: 100%;height: 100%;">Extract File</button>
+            </div>
+            <div class="file-extract" style="height: 4%; text-align: center; width: 100%; background-color: cadetblue">
+                <!--<button id="download-file" type="submit" onclick="window.open('test.html')" style="background-color: cadetblue;width: 100%;height: 100%;">download File</button>-->
+                <a id="link" target="_blank" download="test.html">Download File</a>
+            </div>
+            <div class="window-element-tabselect"style="height: 12%;">
+                <button id="window-tab-btn" style="background-color: white;">Window</button>
+                <button id="add-element-tab-btn" style="background-color: skyblue;">Add Element</button>
+            </div>
+            <div class="tab">
+                <div class="window-tab"style="overflow: auto;">
+                    <div id="show-current-window">Current Window : 1</div>
+                    <button id="add-window">Add window</button><br>
+                    <button id="window1"style="width: 80px;">window 1</button><br>
+                </div>
+                <div class="element-tab"style="overflow: auto;">
+                    <button id="add-textbox">add textbox</button><br>
+                    <button id="add-btn">add btn</button><br>
+                    <button id="add-img">add img</button><br>
+                    <input type="text" id="link-input" style="width: 100px; height: 20px;"><br>
+                    <button id="delete-element">delete element</button>
+                </div>
+            </div>
+        </div>
+        <div class="top-nav">
+            <div class="show-attribute" style="display: flex;">
+                <div class="name-attribute" style="border:1px solid;overflow: auto; width: 25%;">
+                    <div class="element-title" style="width: 100%; background-color: cornflowerblue;">
+                        Element
+                    </div>
+                    Name : &nbsp;
+                    <input type="text" id="name-input" style="width: 80px; height: 20px;"><br>
+                    Text : &nbsp; 
+                    <input type="text" id="text-input" style="width: 80px; height: 20px;">
+                    <div class="css-func-modal-popup">
+                        <button id="css-modal-open">CSS</button>
+                        <button id="function-modal-open">Function</button>
+                    </div>
+                    <div class="position-edit-btn" style="width: 100%;">
+                        <button id="position-edit">Position edit</button>
+                        <button id="z-index-up">▲</button>
+                        <button id="z-index-down">▼</button>
+                    </div>
+                </div>
+                <div class="font" style="border:1px solid;overflow: auto;">
+                    <div class="font-title" style="width: 100%; background-color: cornflowerblue;">
+                        Text
+                    </div>
+                    <div class="font-attribute">
+                        <!-- Font size : -->
+                        <input type="text" id="font-size-input" style="width: 30px; height: 20px;">
+                        px
+                        <input type="color" id="font-color-input">
+                        <!-- Font type :&nbsp;-->
+                        <select name="fontname" id="fontname-select" style="width: 100px;">
+                            <option value="monospace">monospace</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Arial Black">Arial Black</option>
+                            <option value="Courier">Courier</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Comic Sans MS">Comic Sans MS</option>
+                            <option value="Impact">Impact</option>
+                            <option value="궁서체">궁서체</option>
+                            <option value="돋움">돋움</option>
+                            <option value="돋움체">돋움체</option>
+                            <option value="바탕">바탕</option>
+                            <option value="바탕체">바탕체</option>
+                        </select>
+                    </div>
+                    <script>
+                        function setBold(){
+                            document.execCommand("bold");
+                        }
+                        function setItalic(){
+                            document.execCommand("italic");
+                        }
+                        function setSubscript(){
+                            document.execCommand("subscript");
+                        }
+                        function setSuperscript(){
+                            document.execCommand("superscript");
+                        }
+                    </script>
+                    <div class="font-btn-attribute">
+                        <button onclick="setBold();" style="width:20px ;height:20px;"><b>B</b></button>
+                        <button onclick="setItalic();" style="width:20px ;height:20px"><i>I</i></button>
+                        <button onclick="setSubscript();" style="width:30px ;height:20px">A<sub>a</sub></button>
+                        <button onclick="setSuperscript();" style="width:30px ;height:20px">A<sup>a</sup></button>
+                    </div>
+                </div>
+                <div class="border-attribute" style="border:1px solid;overflow: auto;width: 20%;">
+                    <div class="border-title" style="width: 100%; background-color: cornflowerblue;">
+                        Border
+                    </div>
+                    <div class="border-size">
+                        width : &nbsp;
+                        <input type="text" id="border-width-input" style="width: 50px; height: 20px;"> 
+                        px
+                        radius : 
+                        <input type="text" id="border-radius-input" style="width: 50px; height: 20px;">
+                        px
+                        color :
+                        <input type="color" id="border-color-input">
+                    </div>
+                </div>
+                <div class="bgcolor-attribute" style="border:1px solid;overflow: auto;width: 20%;">
+                    <div class="background-title" style="width: 100%; background-color: cornflowerblue;">
+                        Background
+                    </div>
+                    <div class="backgroundcolor">
+                        Element color :  <br>
+                        <input type="color" id="background-color-input">
+                        <input type="range" class="slider" id="element-background-opacity" style="width: 70px;" min="0" max="100" value="0">
+                    </div>
+                    <div class="web-backgroundcolor">
+                        Webpage color : <br>
+                        <input type="color" id="webpage-background-color-input">
+                    </div>           
+                </div>
+                <div class="user-css-attriibute"style="border:1px solid;overflow: auto;">
+                    <div class="user-css-input">
+                        <div class="user-title" style="width: 100%; background-color: cornflowerblue;">
+                        User Defined
+                        </div>
+                        CSS attribute name : &nbsp;
+                        <input type="text" id="user-css-attributename" style="width: 100px;"><br>
+                        CSS attribute value : &nbsp;
+                        <input type="text" id="user-css-attributevalue" style="width: 70px;">
+                        &nbsp;
+                        <button id="user-css-apply" style="width: 50px;">Apply</button>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div> 
+        <div class="resultpage" id="resultpage" style="overflow: auto;">
+            <!-- 
+            <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+            <script>
+                window.onload = function(){
+                    //addwindownum
+                    function changewindow(window){
+                        for(let i = 1; i <= windownum;i++)
+                        {
+                            $('.window'+String(i)).css('display','none');
+                        }
+                        $(window).css('display','block');
+                    }
+                    //addjs
+                }
+            </script>
+            <style>
+                img {
+                    width: 100% !important;
+                    height: 100% !important;
+                }
+                * { box-sizing: border-box; }
+        
+                textarea {
+                    resize:none;
+                }
+                button {
+                    resize:none;
+                }
+                div {
+                    resize:none;
+                }
+            </style> -->
+            <div class="window1" style="bottom: 0;right: 0;width: 100%;height: 100%;margin: 0;display: block;">
+                
+            </div>
+        </div>        
+    </body>
+</html>
