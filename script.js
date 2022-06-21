@@ -6,6 +6,9 @@ window.onload = function(){
     var curwindow = 1;
     var windownum=1;
     var link = 'False';
+    let width_edit = [1,1]; //1이면 editable, 0이면 non-editable
+    let height_edit = [1,1];
+    let tf = ['False','True'];
 
     document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
@@ -38,6 +41,8 @@ window.onload = function(){
         $('.window'+String(window)).css('display','block');
         curwindow = window;
         $("#show-current-window").html('Current Window : '+curwindow);
+        $('#width-editable').html(tf[width_edit[curwindow]]);
+        $('#height-editable').html(tf[width_edit[curwindow]]);
     }
 
     $(".window-tab").click(function(event){
@@ -55,7 +60,7 @@ window.onload = function(){
         btn.style.width = "80px";
         windownum += 1;
         btn.id = 'window'+String(windownum);
-        document.querySelector(".window-tab").appendChild(btn);
+        document.querySelector(".window-num").appendChild(btn);
         $('#'+btn.id).html('window'+String(windownum));
 
         var opt = document.createElement('option');
@@ -75,6 +80,36 @@ window.onload = function(){
         $('.'+window.className).css('height',"100%");
         $('.'+window.className).css('overflow',"auto");
         $('.'+window.className).css('margin','0');
+        width_edit.push(1)
+        height_edit.push(1)
+    })
+
+    $('#width-editable').click(function(){
+        text = $('#width-editable').html();
+        if(text == 'True')
+        {
+            $('#width-editable').html('False');
+            width_edit[curwindow] = 0;
+        }
+        else
+        {
+            $('#width-editable').html('True');
+            width_edit[curwindow] = 1;
+        }
+    })
+
+    $('#height-editable').click(function(){
+        text = $('#height-editable').html();
+        if(text == 'True')
+        {
+            $('#height-editable').html('False');
+            height_edit[curwindow] = 0;
+        }
+        else
+        {
+            $('#height-editable').html('True');
+            height_edit[curwindow] = 1;
+        }
     })
 
     $('#window-tab-btn').click(function(){
@@ -577,16 +612,18 @@ window.onload = function(){
             var t_percent = Number(ct.replace('%',""));
             var l_percent = Number(cl.replace("%",""));
         }
-        //if(flag === false){
+        if(width_edit[curwindow] == 1){
             var win_w_percent = document.querySelector(".window"+curwindow).style.width.replace("%","");
-            var win_h_percent = document.querySelector(".window"+curwindow).style.height.replace("%","");//(win_h/rh)*100;
             console.log("기존 퍼센트 : ",win_w_percent , win_h_percent);
             var final_w = Math.max(Math.max(win_w_percent,w_percent+l_percent),100);
-            var final_h = Math.max(Math.max(win_h_percent,h_percent+t_percent),100);
             console.log("바뀐 퍼센트 : ",final_w ,final_h);
             document.querySelector(".window"+curwindow).style.width = String(final_w)+"%";
+        }
+        if(height_edit[curwindow] == 1){
+            var win_h_percent = document.querySelector(".window"+curwindow).style.height.replace("%","");//(win_h/rh)*100;
+            var final_h = Math.max(Math.max(win_h_percent,h_percent+t_percent),100);
             document.querySelector(".window"+curwindow).style.height = String(final_h)+"%";
-        //}
+        }
        
         /*if(final_w > win_w_percent)
         {
@@ -603,7 +640,7 @@ window.onload = function(){
         
         //$(".window"+curwindow).css('width',final_w);
         //$(".window"+curwindow).css('height',final_h);
-        console.log("window :"+$(".window"+curwindow).css('width'),$(".window"+curwindow).css('height'));
+        console.log("window :"+Number($(".window"+curwindow).css('width').replace('px','')),$(".window"+curwindow).css('height'));
     }
 
     function addbtn() {
@@ -719,6 +756,8 @@ window.onload = function(){
             pos3 = 0,
             pos4 = 0;
         // 이동 목적지
+        var original_w = 0,
+            original_h = 0;
         elmnt.onmousedown = dragMouseDown;
 
         function dragMouseDown(e) {
@@ -728,6 +767,8 @@ window.onload = function(){
                 // 시작지점 마우스좌표 얻기
                 pos3 = e.clientX;
                 pos4 = e.clientY;
+                original_w = Number($(".window"+curwindow).css('width').replace('px',''));
+                console.log("org_w : ",original_w);
                 document.onmouseup = closeDragElement;
                 // 이동지점 마우스좌표 얻기
                 document.onmousemove = elementDrag;
@@ -743,8 +784,22 @@ window.onload = function(){
             pos3 = e.clientX;
             pos4 = e.clientY;
             // 요소의 새 위치 설정
-            elmnt.style.top = Math.max(0,(elmnt.offsetTop - pos2)) + "px";
-            elmnt.style.left = Math.max((elmnt.offsetLeft - pos1),0) + "px";
+            if(width_edit[curwindow] == 1)
+            {
+                elmnt.style.left = Math.max((elmnt.offsetLeft - pos1),0) + "px";
+            }
+            if(height_edit[curwindow] == 1)
+            {
+                elmnt.style.top = Math.max(0,(elmnt.offsetTop - pos2)) + "px";
+            }
+            if(width_edit[curwindow] == 0)
+            {
+                elmnt.style.left = Math.min(Math.max((elmnt.offsetLeft - pos1),0),original_w) + "px";
+            }
+            if(height_edit[curwindow] == 0)
+            {
+                elmnt.style.top = Math.min(Math.max(0,(elmnt.offsetTop - pos2))) + "px";
+            }
         }
 
         function closeDragElement(e) {
